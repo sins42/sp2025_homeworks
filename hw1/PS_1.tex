@@ -1,5 +1,6 @@
 \documentclass[10pt]{article}
-\usepackage{amsmath, amssymb}
+\usepackage{amsmath, amssymb} 
+\usepackage[linewidth=1pt]{mdframed}
 
 \begin{document}
 
@@ -17,12 +18,52 @@
 
 \section*{Problem 2.1}
 
-To walk “downhill” on the loss function (equation 2.5), we measure its gradient with respect to the parameters $\phi_0$ and $\phi_1$. Calculate expressions for the slopes $\frac{\partial L}{\partial \phi_0}$ and $\frac{\partial L}{\partial \phi_1}$.
+To walk “downhill” on the loss function (equation 2.5), we measure its gradient with respect to the parameters $\phi_0$ and $\phi_1$. Calculate expressions for the slopes $\frac{\partial L}{\partial \phi_0}$ and $\frac{\partial L}{\partial \phi_1}$.  
+
+$\newline$
+Answer:
+\begin{enumerate}
+    \item \begin{align*}
+        \frac{\partial L}{\partial \phi_0} =\frac{\partial}{\partial \phi_0} \sum_{i=1}^{I} (\phi_0 + \phi_1x_i - y_i)^2 \\
+        = \sum_{i=1}^{I} 2 (\phi_0 + \phi_1x_i - y_i)
+    \end{align*}
+    \item \begin{align*}
+        \frac{\partial L}{\partial \phi_1} =\frac{\partial}{\partial \phi_1} \sum_{i=1}^{I} (\phi_0 + \phi_1x_i - y_i)^2 \\
+        = \sum_{i=1}^{I} 2x_i (\phi_0 + \phi_1x_i - y_i)
+    \end{align*}
+\end{enumerate}
 
 \vspace{20em}
 
 \section*{Problem 2.2}
 
-Show that we can find the minimum of the loss function in closed-form by setting the expression for the derivatives from Problem 2.1 to zero and solving for $\phi_0$ and $\phi_1$.
-
+Show that we can find the minimum of the loss function in closed-form by setting the expression for the derivatives from Problem 2.1 to zero and solving for $\phi_0$ and $\phi_1$. \\
+Answer:
+    \begin{enumerate}
+        \item \begin{align*}
+            \frac{\partial L}{\partial \phi_0} = 0 \\
+            \sum_{i=1}^{I} 2 (\phi_0 + \phi_1x_i - y_i) = 0 \\
+            \sum_{i=1}^{I} (\phi_0 + \phi_1x_i - y_i) = 0 \\
+            \sum_{i=1}^{I} (\phi_0) + \sum_{i=1}^{I} (\phi_1x_i) - \sum_{i=1}^{I} (y_i) = 0 \\ 
+            \sum_{i=1}^{I} (\phi_0) = \sum_{i=1}^{I} (y_i) - \sum_{i=1}^{I} (\phi_1x_i) \\
+            I(\phi_0) = \sum_{i=1}^{I} (y_i) - \sum_{i=1}^{I} (\phi_1x_i) \\ 
+            \phi_0 = \frac{\sum_{i=1}^{I} (y_i)}{I}  - \phi_1 \frac{\sum_{i=1}^{I}x_i}{I} \\
+            \phi_0 = \overline{y} - \phi_1 \overline{x}
+        \end{align*}
+        \item \begin{align*}
+            \frac{\partial L}{\partial \phi_1} = 0 \\
+            \sum_{i=1}^{I} 2x_i (\phi_0 + \phi_1x_i - y_i) = 0 \\
+            \sum_{i=1}^{I} x_i (\phi_0 + \phi_1x_i - y_i) = 0 \\ 
+            \sum_{i=1}^{I} (\phi_0x_i + \phi_1x_i^2 - y_ix_i) = 0 \\ 
+            \phi_0 \sum_{i=1}^{I}x_i + \phi_1\sum_{i=1}^{I}x_i^2 - \sum_{i=1}^{I} y_ix_i = 0 \\ 
+            \phi_1\sum_{i=1}^{I}x_i^2 = \sum_{i=1}^{I} y_ix_i - \phi_0 \sum_{i=1}^{I}x_i  \\ 
+            \phi_1\sum_{i=1}^{I}x_i^2 = \sum_{i=1}^{I} y_ix_i - (\overline{y} - \phi_1 \overline{x}) \sum_{i=1}^{I}x_i \\
+            \phi_1\sum_{i=1}^{I}x_i^2 = \sum_{i=1}^{I} y_ix_i - (\overline{y} - \phi_1 \overline{x}) I\overline{x} \\  
+            \phi_1\sum_{i=1}^{I}x_i^2 = \sum_{i=1}^{I} y_ix_i - \overline{y}I\overline{x} + I\phi_1 \overline{x}^2 \\
+            \phi_1\sum_{i=1}^{I}x_i^2 - I\phi_1 \overline{x}^2 = \sum_{i=1}^{I} y_ix_i - \overline{y}I\overline{x} \\ 
+            \phi_1(\sum_{i=1}^{I}x_i^2 - I\overline{x}^2)= \sum_{i=1}^{I} y_ix_i - \overline{y}I\overline{x} \\ 
+            \phi_1 = \frac{\sum_{i=1}^{I} y_ix_i - \overline{y}I\overline{x}}{(\sum_{i=1}^{I}x_i^2 - I\overline{x}^2)} \\ 
+            \phi_1 = \frac{\sum_{i=1}^{I} (x_i -\overline{x}) (y_i - \overline{y})}{\sum_{i=1}^{I}(x_i -\overline{x})^2} 
+        \end{align*}
+    \end{enumerate}
 \end{document}
