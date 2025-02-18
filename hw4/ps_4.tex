@@ -24,8 +24,17 @@ h = \sigma(z) = \frac{1}{1 + e^{-z}}.
 \end{equation}
 
 \noindent Compute the derivative \( \frac{\partial h}{\partial z} \). What happens
-to the derivative when the input takes (i) a large positive value and (ii) a large negative value?
+to the derivative when the input takes (i) a large positive value and (ii) a large negative value? \\ \\ 
 
+\textbf{Answer}:  
+\begin{align*}
+    h = \sigma(z) = \frac{1}{1 + e^{-z}} = 1(1 + e^{-z})^{-1} \\ 
+    \frac{\partial h}{\partial z} = (-1)\left( \frac{1}{(1 + e^{-z})^{2}}\right)(-e^{-z}) \\
+    = \frac{e^{-z}}{(1 + e^{-z})^{2}}
+\end{align*}
+(i) When the input $z$ is a large positive value, the derivative becomes smaller and approaches 0. \\ \\ 
+(ii)When the input $z$ is a large negative value, the derivative becomes smaller and approaches 0 as well.
+\vspace{5em}
 \vspace{5em}
 
 \section*{Problem 4.2 (3 points)}
@@ -42,6 +51,40 @@ where the function \( \sigma(\cdot) \) is the logistic sigmoid, defined as:
 \begin{equation}
 \sigma(z) = \frac{1}{1 + \exp(-z)}.
 \end{equation}
+
+\textbf{Answer}:  \\ \\ 
+\text{Step 1: Derivative of the loss function with respect to $\sigma$:}\\ \\ 
+\text{Define $\hat{y} = \sigma(f[x_i, \phi])$} 
+\begin{align*}
+    \ell_i = -(1 - y_i) \log [1 - \hat{y}] - y_i \log [\hat{y}] \\ 
+    \frac{\partial}{\partial \hat{y}} -(1 - y_i) \log [1 - \hat{y}] \\
+    = -(1 - y_{i}) \frac{1}{(1- \hat{y})}(-1) \\ 
+    = \frac{1-y_{i}}{1 - \hat{y}} \tag{4} \\ 
+    \frac{\partial}{\partial \hat{y}} - y_i \log [\hat{y}] \\
+    = -(y_{i})\frac{1}{\hat{y}}(1) \\ 
+    = -\frac{y_{i}}{\hat{y}} \tag{5}  \\ 
+\end{align*}
+\text{Combine (4) and (5) in the derivative} 
+\begin{align*}
+    \frac{\partial \ell_i}{\partial \hat{y}} = \frac{1-y_{i}}{1 - \hat{y}} -\frac{y_{i}}{\hat{y}}
+\end{align*} \\ 
+Step 2: Derivative of the sigmoid function:\\ \\ 
+\begin{align*}
+    \frac{\partial \sigma(z)}{\partial z} = \frac{e^{-z}}{(1 + e^{-z})^{2}} \\  
+\end{align*}
+\\ \\ 
+We know $\sigma(z) = \frac{1}{1 + \exp(-z)}$ \\ \\ and \\ \\ 
+$1 - \sigma(z) = \frac{\exp(-z)}{1 + \exp(-z)}$ \\ \\
+\text{Hence, the derivative can be rewritten as:}
+\begin{align*}
+    \frac{\partial \sigma(z)}{\partial z}  = \sigma(z)(1 - \sigma(z)) \\ 
+    \frac{\partial \hat{y}}{\partial f[x_i, \phi]} = \hat{y}(1 - \hat{y})
+\end{align*} \\ 
+Step 3: Apply the chain rule:
+\begin{align*}
+    \frac{\partial \ell_i}{\partial f[x_i, \phi]} = \frac{\partial \ell_i}{\partial \hat{y}} . \frac{\partial \hat{y}}{\partial f[x_i, \phi]} \\
+    = \hat{y}(1 - \hat{y}) . \left( \frac{1-y_{i}}{1 - \hat{y}} -\frac{y_{i}}{\hat{y}} \right)
+\end{align*}
 
 \vspace{5em}
 
